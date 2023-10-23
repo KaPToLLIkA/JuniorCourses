@@ -27,6 +27,10 @@
                     ConditionalOperationsAndLoops_Task5.CurrenciesConverter.Main,
                     "Currencies converter"
                 ),
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task6.ConsoleMenu.Main,
+                    "Console menu"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
