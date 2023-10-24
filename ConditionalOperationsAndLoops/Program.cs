@@ -51,6 +51,10 @@
                     ConditionalOperationsAndLoops_Task11.BracketsSequence.Main,
                     "Brackets sequence"
                 ),
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task12.FinalBoss.Main,
+                    "Final boss"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
