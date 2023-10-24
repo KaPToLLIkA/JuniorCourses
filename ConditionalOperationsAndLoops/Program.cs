@@ -47,6 +47,10 @@
                     ConditionalOperationsAndLoops_Task10.PowerOfTwo.Main,
                     "Power of two"
                 ),
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task11.BracketsSequence.Main,
+                    "Brackets sequence"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
