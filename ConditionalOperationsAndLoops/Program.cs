@@ -31,6 +31,10 @@
                     ConditionalOperationsAndLoops_Task6.ConsoleMenu.Main,
                     "Console menu"
                 ),
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task7.NameBox.Main,
+                    "Name box"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
