@@ -15,26 +15,31 @@ namespace ConditionalOperationsAndLoops_Task11
             string bracketsInput = Console.ReadLine();
 
             int maxDepth = 0;
-            int curDepth = 0;
+            int currrentDepth = 0;
 
-            for (int i = 0; i < bracketsInput.Length && curDepth >= 0; i++)
+            for (int i = 0; i < bracketsInput.Length; i++)
             { 
                 if (bracketsInput[i] == '(' )
                 {
-                    curDepth++;
+                    currrentDepth++;
+
+                    if (currrentDepth > maxDepth)
+                    {
+                        maxDepth = currrentDepth;
+                    }
                 } 
                 else if (bracketsInput[i] == ')' )
                 {
-                    curDepth--;
-                }
+                    currrentDepth--;
 
-                if (curDepth > maxDepth)
-                {
-                    maxDepth = curDepth;
+                    if (currrentDepth <= 0)
+                    {
+                        break;
+                    }
                 }
             }
 
-            if (curDepth == 0)
+            if (currrentDepth == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Sequence is valid");
