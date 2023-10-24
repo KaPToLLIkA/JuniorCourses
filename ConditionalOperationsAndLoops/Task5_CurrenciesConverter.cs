@@ -58,13 +58,13 @@ namespace ConditionalOperationsAndLoops_Task5
 
                 Console.WriteLine(
                     $"Print index of menu command:\n" +
-                    $"1. {goldCurrencyName} To {diamondsCurrencyName}\n" +
-                    $"2. {goldCurrencyName} To {emeraldsCurrencyName}\n" +
-                    $"3. {diamondsCurrencyName} To {goldCurrencyName}\n" +
-                    $"4. {diamondsCurrencyName} To {emeraldsCurrencyName}\n" +
-                    $"5. {emeraldsCurrencyName} To {goldCurrencyName}\n" +
-                    $"6. {emeraldsCurrencyName} To {diamondsCurrencyName}\n" +
-                    $"0. EXIT.");
+                    $"{GoldToDiamondsCommand}. {goldCurrencyName} To {diamondsCurrencyName}\n" +
+                    $"{GoldToEmeraldsCommand}. {goldCurrencyName} To {emeraldsCurrencyName}\n" +
+                    $"{DiamondsToGoldCommand}. {diamondsCurrencyName} To {goldCurrencyName}\n" +
+                    $"{DiamondsToEmeraldsCommand}. {diamondsCurrencyName} To {emeraldsCurrencyName}\n" +
+                    $"{EmeraldsToGoldCommand}. {emeraldsCurrencyName} To {goldCurrencyName}\n" +
+                    $"{EmeraldsToDiamondsCommand}. {emeraldsCurrencyName} To {diamondsCurrencyName}\n" +
+                    $"{ExitCommand}. EXIT.");
 
                 commandsInput = Console.ReadLine();
 
