@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace ConditionalOperationsAndLoops_Task5
 {
@@ -7,26 +8,35 @@ namespace ConditionalOperationsAndLoops_Task5
     {
         public static void Main(string[] args)
         {
-            const float DiamondsPriceInGold = 10f;
-            const float EmeraldsPriceInDiamonds = 20f;
+            float DiamondPriceInGold = 10f;
+            float EmeraldPriceInDiamonds = 20f;
 
-            const float DiamondsPriceInEmeralds = 1.0f / EmeraldsPriceInDiamonds;
-            const float EmeraldsPriceInGold = EmeraldsPriceInDiamonds * DiamondsPriceInGold;
+            float DiamondPriceInEmeralds = 1.0f / EmeraldPriceInDiamonds;
+            float EmeraldPriceInGold = EmeraldPriceInDiamonds * DiamondPriceInGold;
 
-            const float GoldPriceInDiamonds = 1.0f / DiamondsPriceInGold;
-            const float GoldPriceInEmeralds = 1.0f / EmeraldsPriceInGold;
+            float GoldPriceInDiamonds = 1.0f / DiamondPriceInGold;
+            float GoldPriceInEmeralds = 1.0f / EmeraldPriceInGold;
 
-            const string GoldCurrencyName = "GOLD";
-            const string DiamondsCurrencyName = "DIAMONDS";
-            const string EmeraldsCurrencyName = "EMERALDS";
-            const string YesCommand = "YES";
-            const string NoCommand = "NO";
+            string GoldCurrencyName = "GOLD";
+            string DiamondsCurrencyName = "DIAMONDS";
+            string EmeraldsCurrencyName = "EMERALDS";
+
+            const string ExitCommand = "0";
+
+            const string GoldToDiamondsCommand = "1";
+            const string GoldToEmeraldsCommand = "2";
+
+            const string DiamondsToGoldCommand = "3";
+            const string DiamondsToEmeraldsCommand = "4";
+
+            const string EmeraldsToGoldCommand = "5";
+            const string EmeraldsToDiamondsCommand = "6";
+
+            string commandsInput = string.Empty;
 
             float goldCount = 10000;
             float diamondsCount = 0;
             float emeraldsCount = 0;
-
-            string commandsInput = string.Empty;
 
             bool isWorking = true;
 
@@ -38,303 +48,177 @@ namespace ConditionalOperationsAndLoops_Task5
                     $"{diamondsCount} {DiamondsCurrencyName};\n" +
                     $"{goldCount} {GoldCurrencyName}\n");
 
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(
-                    $"\nDo you want to excange currencies?\n" +
-                    $"Print \"{YesCommand}\" if you want or \"{NoCommand}\" if not.");
+                    $"\nCurrency exchange rates:\n" +
+                    $"1 {DiamondsCurrencyName} = {DiamondPriceInGold} {GoldCurrencyName}\n" +
+                    $"1 {EmeraldsCurrencyName} = {EmeraldPriceInGold} {GoldCurrencyName}\n" +
+                    $"1 {EmeraldsCurrencyName} = {EmeraldPriceInDiamonds} {DiamondsCurrencyName}");
+                Console.ResetColor();
 
-                commandsInput = Console.ReadLine().ToUpper();
+                Console.WriteLine(
+                    $"Print index of menu command:\n" +
+                    $"1. {GoldCurrencyName} To {DiamondsCurrencyName}\n" +
+                    $"2. {GoldCurrencyName} To {EmeraldsCurrencyName}\n" +
+                    $"3. {DiamondsCurrencyName} To {GoldCurrencyName}\n" +
+                    $"4. {DiamondsCurrencyName} To {EmeraldsCurrencyName}\n" +
+                    $"5. {EmeraldsCurrencyName} To {GoldCurrencyName}\n" +
+                    $"6. {EmeraldsCurrencyName} To {DiamondsCurrencyName}\n" +
+                    $"0. EXIT.");
+
+                commandsInput = Console.ReadLine();
 
                 Console.Clear();
 
-                if (commandsInput == YesCommand)
+                if (commandsInput != GoldToDiamondsCommand
+                    && commandsInput != GoldToEmeraldsCommand
+                    && commandsInput != DiamondsToGoldCommand
+                    && commandsInput != DiamondsToEmeraldsCommand
+                    && commandsInput != EmeraldsToGoldCommand
+                    && commandsInput != EmeraldsToDiamondsCommand
+                    && commandsInput != ExitCommand)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\n\nLet's start the conversion . . .");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nI don't understand you. Try again, please.\n");
                     Console.ResetColor();
-
-                    bool isConversionFailed = true;
-                    bool isCurrencyIndexInvalid = true;
-                    string currencyToConvertFrom = string.Empty;
-                    string currencyToConvertTo = string.Empty;
-
-                    while (isConversionFailed)
-                    {
-                        while (isCurrencyIndexInvalid)
-                        {
-                            Console.WriteLine(
-                                $"Print index of the currency you want to convert from. \n" +
-                                $"Available currencies:\n" +
-                                $"1. {GoldCurrencyName},\n" +
-                                $"2. {DiamondsCurrencyName},\n" +
-                                $"3. {EmeraldsCurrencyName}.");
-
-                            string currencyIndexInput = Console.ReadLine();
-                            Console.Clear();
-
-                            if (Int32.TryParse(currencyIndexInput, out int currencyIndex)
-                                && currencyIndex >= 1 && currencyIndex <= 3)
-                            {
-                                currencyToConvertFrom = currencyIndex switch
-                                {
-                                    1 => GoldCurrencyName,
-                                    2 => DiamondsCurrencyName,
-                                    3 => EmeraldsCurrencyName,
-                                    _ => throw new NotImplementedException()
-                                };
-
-                                if ((currencyToConvertFrom == GoldCurrencyName && goldCount > 0)
-                                    || (currencyToConvertFrom == DiamondsCurrencyName && diamondsCount > 0)
-                                    || (currencyToConvertFrom == EmeraldsCurrencyName && emeraldsCount > 0))
-                                {
-                                    isCurrencyIndexInvalid = false;
-                                } 
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine($"\nNot enough {currencyToConvertFrom}. Try again, please.\n");
-                                    Console.ResetColor();
-                                }
-                            }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("\nI don't understand you. Try again, please.\n");
-                                Console.ResetColor();
-                            }
-                        }
-
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.WriteLine(
-                            $"\nCurrency exchange rates:\n" +
-                            $"1 {DiamondsCurrencyName} = {DiamondsPriceInGold} {GoldCurrencyName}\n" +
-                            $"1 {EmeraldsCurrencyName} = {EmeraldsPriceInGold} {GoldCurrencyName}\n" +
-                            $"1 {EmeraldsCurrencyName} = {EmeraldsPriceInDiamonds} {DiamondsCurrencyName}");
-                        Console.ResetColor();
-
-                        float maxGoldCount = 0;
-                        float maxDiamondsCount = 0;
-                        float maxEmeraldsCount = 0;
-
-                        switch (currencyToConvertFrom)
-                        {
-                            case GoldCurrencyName:
-                                maxEmeraldsCount = goldCount / EmeraldsPriceInGold;
-                                maxDiamondsCount = goldCount / DiamondsPriceInGold;
-
-                                break;
-                            case DiamondsCurrencyName:
-                                maxGoldCount = diamondsCount / GoldPriceInDiamonds;
-                                maxEmeraldsCount = diamondsCount / EmeraldsPriceInDiamonds;
-
-                                break;
-                            case EmeraldsCurrencyName:
-                                maxGoldCount = emeraldsCount / GoldPriceInEmeralds;
-                                maxDiamondsCount = emeraldsCount / DiamondsPriceInEmeralds;
-
-                                break;
-                        }
-
-                        isCurrencyIndexInvalid = true;
-
-                        while (isCurrencyIndexInvalid)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine(
-                                $"\nYou can get no more than\n" +
-                                $"{maxGoldCount} {GoldCurrencyName}\n" +
-                                $"{maxDiamondsCount} {DiamondsCurrencyName}\n" +
-                                $"{maxEmeraldsCount} {EmeraldsCurrencyName}\n");
-                            Console.ResetColor();
-
-                            Console.WriteLine(
-                                $"Print index of the currency you want to convert to. \n" +
-                                $"Available currencies:\n" +
-                                $"1. {GoldCurrencyName},\n" +
-                                $"2. {DiamondsCurrencyName},\n" +
-                                $"3. {EmeraldsCurrencyName}.");
-
-                            string currencyIndexInput = Console.ReadLine();
-
-                            Console.Clear();
-
-                            if (Int32.TryParse(currencyIndexInput, out int currencyIndex)
-                                && currencyIndex >= 1 && currencyIndex <= 3)
-                            {
-                                currencyToConvertTo = currencyIndex switch
-                                {
-                                    1 => GoldCurrencyName,
-                                    2 => DiamondsCurrencyName,
-                                    3 => EmeraldsCurrencyName,
-                                    _ => throw new NotImplementedException()
-                                };
-
-                                if (currencyToConvertTo != currencyToConvertFrom)
-                                {
-                                    isCurrencyIndexInvalid = false;
-                                }
-                            }
-
-                            if (isCurrencyIndexInvalid)
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("\nI don't understand you. Try again, please.\n");
-                                Console.ResetColor();
-                            }
-                        }
-
-                        bool isCurrencyCountInvalid = true;
-                        float targetCurrencyCount = 0;
-
-                        while (isCurrencyCountInvalid)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine(
-                                $"\nYou can get no more than\n" +
-                                $"{maxGoldCount} {GoldCurrencyName}\n" +
-                                $"{maxDiamondsCount} {DiamondsCurrencyName}\n" +
-                                $"{maxEmeraldsCount} {EmeraldsCurrencyName}\n");
-                            Console.ResetColor();
-
-                            Console.WriteLine(
-                                $"Print the count of " +
-                                $"{currencyToConvertTo} you want to receive.");
-
-                            string currencyCountInput = Console.ReadLine();
-
-                            Console.Clear();
-
-                            if (float.TryParse(currencyCountInput, out targetCurrencyCount)
-                                 && targetCurrencyCount > 0)
-                            {
-                                isCurrencyCountInvalid = false;
-                            }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("\nI don't understand you. Try again, please.\n");
-                                Console.ResetColor();
-                            }
-                        }
-
-                        Console.ForegroundColor = ConsoleColor.Red;
-
-                        if (currencyToConvertFrom == GoldCurrencyName)
-                        {
-                            if (currencyToConvertTo == EmeraldsCurrencyName)
-                            {
-                                float requiredCurrencyCount = targetCurrencyCount * EmeraldsPriceInGold;
-                                if (requiredCurrencyCount > goldCount)
-                                {
-                                    float notEnoughCount = requiredCurrencyCount - goldCount;
-
-                                    Console.WriteLine($"{notEnoughCount} {currencyToConvertFrom} was not enough\n");
-                                }
-                                else
-                                {
-                                    goldCount -= requiredCurrencyCount;
-                                    emeraldsCount += targetCurrencyCount;
-                                    isConversionFailed = false;
-                                }
-                            }
-                            else if (currencyToConvertTo == DiamondsCurrencyName)
-                            {
-                                float requiredCurrencyCount = targetCurrencyCount * DiamondsPriceInGold;
-                                if (requiredCurrencyCount > goldCount)
-                                {
-                                    float notEnoughCount = requiredCurrencyCount - goldCount;
-
-                                    Console.WriteLine($"{notEnoughCount} {currencyToConvertFrom} was not enough\n");
-                                }
-                                else
-                                {
-                                    goldCount -= requiredCurrencyCount;
-                                    diamondsCount += targetCurrencyCount;
-                                    isConversionFailed = false;
-                                }
-                            }
-                        }
-                        else if (currencyToConvertFrom == EmeraldsCurrencyName)
-                        {
-                            if (currencyToConvertTo == GoldCurrencyName)
-                            {
-                                float requiredCurrencyCount = targetCurrencyCount * GoldPriceInEmeralds;
-                                if (requiredCurrencyCount > emeraldsCount)
-                                {
-                                    float notEnoughCount = requiredCurrencyCount - emeraldsCount;
-
-                                    Console.WriteLine($"{notEnoughCount} {currencyToConvertFrom} was not enough\n");
-                                }
-                                else
-                                {
-                                    emeraldsCount -= requiredCurrencyCount;
-                                    goldCount += targetCurrencyCount;
-                                    isConversionFailed = false;
-                                }
-                            }
-                            else if (currencyToConvertTo == DiamondsCurrencyName)
-                            {
-                                float requiredCurrencyCount = targetCurrencyCount * DiamondsPriceInEmeralds;
-                                if (requiredCurrencyCount > emeraldsCount)
-                                {
-                                    float notEnoughCount = requiredCurrencyCount - emeraldsCount;
-
-                                    Console.WriteLine($"{notEnoughCount} {currencyToConvertFrom} was not enough\n");
-                                }
-                                else
-                                {
-                                    emeraldsCount -= requiredCurrencyCount;
-                                    goldCount += targetCurrencyCount;
-                                    isConversionFailed = false;
-                                }
-                            }
-                        }
-                        else if (currencyToConvertFrom == DiamondsCurrencyName)
-                        {
-                            if (currencyToConvertTo == EmeraldsCurrencyName)
-                            {
-                                float requiredCurrencyCount = targetCurrencyCount * EmeraldsPriceInDiamonds;
-                                if (requiredCurrencyCount > diamondsCount)
-                                {
-                                    float notEnoughCount = requiredCurrencyCount - diamondsCount;
-
-                                    Console.WriteLine($"{notEnoughCount} {currencyToConvertFrom} was not enough\n");
-                                }
-                                else
-                                {
-                                    diamondsCount -= requiredCurrencyCount;
-                                    emeraldsCount += targetCurrencyCount;
-                                    isConversionFailed = false;
-                                }
-                            }
-                            else if (currencyToConvertTo == GoldCurrencyName)
-                            {
-                                float requiredCurrencyCount = targetCurrencyCount * GoldPriceInDiamonds;
-                                if (requiredCurrencyCount > diamondsCount)
-                                {
-                                    float notEnoughCount = requiredCurrencyCount - diamondsCount;
-
-                                    Console.WriteLine($"{notEnoughCount} {currencyToConvertFrom} was not enough\n");
-                                }
-                                else
-                                {
-                                    diamondsCount -= requiredCurrencyCount;
-                                    goldCount += targetCurrencyCount;
-                                    isConversionFailed = false;
-                                }
-                            }
-                        }
-
-                        if (isConversionFailed)
-                        {
-                            Console.WriteLine("Conversion failed");
-                        }
-
-                        Console.ResetColor();
-                    }
-                }
-                else if (commandsInput == NoCommand)
+                } 
+                else if (commandsInput == ExitCommand)
                 {
                     isWorking = false;
+                }
+                else
+                {
+                    bool isCurrencyCountInvalid = true;
+                    float requestedCurrencyCount = 0;
+
+                    Console.Clear();
+                    Console.WriteLine("Print the currency count you want to receive:");
+
+                    while (isCurrencyCountInvalid)
+                    {
+                        string currencyCountInput = Console.ReadLine();
+
+                        if (float.TryParse(currencyCountInput, out requestedCurrencyCount)
+                            && requestedCurrencyCount >= 0)
+                        {
+                            isCurrencyCountInvalid = false;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nI don't understand you. Try again, please.\n");
+                            Console.ResetColor();
+                        }
+                    }
+
+                    string conversionTypeCommand = commandsInput;
+                    float requiredCurrencyCount = 0;
+                    float notEnoughCount = 0;
+
+                    switch (conversionTypeCommand)
+                    {
+                        case GoldToDiamondsCommand:
+                            requiredCurrencyCount = requestedCurrencyCount * DiamondPriceInGold;
+
+                            if (requiredCurrencyCount > goldCount)
+                            {
+                                notEnoughCount = requiredCurrencyCount - goldCount;
+
+                                Console.WriteLine($"{notEnoughCount} {GoldCurrencyName} was not enough\n");
+                            }
+                            else
+                            {
+                                goldCount -= requiredCurrencyCount;
+                                diamondsCount += requestedCurrencyCount;
+                            }
+
+                            break;
+
+                        case GoldToEmeraldsCommand:
+                            requiredCurrencyCount = requestedCurrencyCount * EmeraldPriceInGold;
+
+                            if (requiredCurrencyCount > goldCount)
+                            {
+                                notEnoughCount = requiredCurrencyCount - goldCount;
+
+                                Console.WriteLine($"{notEnoughCount} {GoldCurrencyName} was not enough\n");
+                            }
+                            else
+                            {
+                                goldCount -= requiredCurrencyCount;
+                                emeraldsCount += requestedCurrencyCount;
+                            }
+
+                            break;
+
+                        case DiamondsToGoldCommand:
+                            requiredCurrencyCount = requestedCurrencyCount * GoldPriceInDiamonds;
+
+                            if (requiredCurrencyCount > diamondsCount)
+                            {
+                                notEnoughCount = requiredCurrencyCount - diamondsCount;
+
+                                Console.WriteLine($"{notEnoughCount} {DiamondsCurrencyName} was not enough\n");
+                            }
+                            else
+                            {
+                                diamondsCount -= requiredCurrencyCount;
+                                goldCount += requestedCurrencyCount;
+                            }
+
+                            break;
+
+                        case DiamondsToEmeraldsCommand:
+                            requiredCurrencyCount = requestedCurrencyCount * EmeraldPriceInDiamonds;
+
+                            if (requiredCurrencyCount > diamondsCount)
+                            {
+                                notEnoughCount = requiredCurrencyCount - diamondsCount;
+
+                                Console.WriteLine($"{notEnoughCount} {DiamondsCurrencyName} was not enough\n");
+                            }
+                            else
+                            {
+                                diamondsCount -= requiredCurrencyCount;
+                                emeraldsCount += requestedCurrencyCount;
+                            }
+
+                            break;
+
+                        case EmeraldsToGoldCommand:
+                            requiredCurrencyCount = requestedCurrencyCount * GoldPriceInEmeralds;
+
+                            if (requiredCurrencyCount > emeraldsCount)
+                            {
+                                notEnoughCount = requiredCurrencyCount - emeraldsCount;
+
+                                Console.WriteLine($"{notEnoughCount} {EmeraldsCurrencyName} was not enough\n");
+                            }
+                            else
+                            {
+                                emeraldsCount -= requiredCurrencyCount;
+                                goldCount += requestedCurrencyCount;
+                            }
+
+                            break;
+
+                        case EmeraldsToDiamondsCommand:
+                            requiredCurrencyCount = requestedCurrencyCount * DiamondPriceInEmeralds;
+
+                            if (requiredCurrencyCount > emeraldsCount)
+                            {
+                                notEnoughCount = requiredCurrencyCount - emeraldsCount;
+
+                                Console.WriteLine($"{notEnoughCount} {EmeraldsCurrencyName} was not enough\n");
+                            }
+                            else
+                            {
+                                emeraldsCount -= requiredCurrencyCount;
+                                diamondsCount += requestedCurrencyCount;
+                            }
+
+                            break;
+                    }
                 }
             }
 
