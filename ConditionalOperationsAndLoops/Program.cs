@@ -39,6 +39,10 @@
                     ConditionalOperationsAndLoops_Task8.PasswordApp.Main,
                     "Password app"
                 ),
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task9.Multiples.Main,
+                    "Multiples"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
