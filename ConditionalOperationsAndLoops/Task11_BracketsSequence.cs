@@ -14,12 +14,15 @@ namespace ConditionalOperationsAndLoops_Task11
 
             string bracketsInput = Console.ReadLine();
 
+            char openBracket = '(';
+            char closeBracket = ')';
+
             int maxDepth = 0;
             int currrentDepth = 0;
 
             for (int i = 0; i < bracketsInput.Length; i++)
             { 
-                if (bracketsInput[i] == '(' )
+                if (bracketsInput[i] == openBracket)
                 {
                     currrentDepth++;
 
@@ -28,7 +31,7 @@ namespace ConditionalOperationsAndLoops_Task11
                         maxDepth = currrentDepth;
                     }
                 } 
-                else if (bracketsInput[i] == ')' )
+                else if (bracketsInput[i] == closeBracket)
                 {
                     currrentDepth--;
 
