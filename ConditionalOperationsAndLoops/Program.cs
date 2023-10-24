@@ -35,6 +35,10 @@
                     ConditionalOperationsAndLoops_Task7.NameBox.Main,
                     "Name box"
                 ),
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task8.PasswordApp.Main,
+                    "Password app"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
