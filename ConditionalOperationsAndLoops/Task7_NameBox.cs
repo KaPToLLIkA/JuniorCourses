@@ -14,31 +14,14 @@ namespace ConditionalOperationsAndLoops_Task7
             string name = Console.ReadLine();
 
             Console.Write("Print symbol:");
-            string symbol = Console.ReadLine();
+            char symbol = (char)Console.Read();
 
             Console.Clear();
 
-            string space = " ";
+            string middleRow = $"{symbol} {name} {symbol}";
+            string headerAndFooter = new(symbol, middleRow.Length);
 
-            int rowsCount = 3;
-            int columnsCount = name.Length + symbol.Length * 2 + space.Length * 2;
-
-            for (int y = 0; y < rowsCount; y++)
-            {
-                if (y == 0 || y == rowsCount - 1)
-                {
-                    for (int x = 0; x < columnsCount; x++)
-                    {
-                        Console.Write(symbol);
-                    }
-
-                    Console.WriteLine();
-                } 
-                else
-                {
-                    Console.WriteLine($"{symbol}{space}{name}{space}{symbol}");
-                }
-            }
+            Console.Write($"\n{headerAndFooter}\n{middleRow}\n{headerAndFooter}");
         }
     }
 }
