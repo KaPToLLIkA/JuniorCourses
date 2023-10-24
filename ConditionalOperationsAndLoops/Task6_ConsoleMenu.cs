@@ -16,7 +16,7 @@ namespace ConditionalOperationsAndLoops_Task6
             const string DivideValuesCommand = "4";
             const string ExitCommand = "0";
 
-            ConsoleColor currentBgColor = Console.ForegroundColor;
+            ConsoleColor currentBackgroundColor = Console.ForegroundColor;
 
             IEnumerable<ConsoleColor> availableColors = Enum.GetValues(typeof(ConsoleColor)).Cast<ConsoleColor>();
 
@@ -24,7 +24,7 @@ namespace ConditionalOperationsAndLoops_Task6
 
             while (isRunning)
             {
-                Console.ForegroundColor = currentBgColor;
+                Console.ForegroundColor = currentBackgroundColor;
 
                 Console.WriteLine(
                     $"Select command:\n" +
@@ -63,14 +63,14 @@ namespace ConditionalOperationsAndLoops_Task6
                                 && colorIndex >= 0
                                 && colorIndex < availableColors.Count())
                             {
-                                currentBgColor = availableColors.ElementAt(colorIndex);
+                                currentBackgroundColor = availableColors.ElementAt(colorIndex);
                                 isIndexInvalid = false;
                             }
                             else
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Input error.\n");
-                                Console.ForegroundColor = currentBgColor;
+                                Console.ForegroundColor = currentBackgroundColor;
                             }
                         }
 
@@ -93,7 +93,7 @@ namespace ConditionalOperationsAndLoops_Task6
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Input error.\n");
-                                Console.ForegroundColor = currentBgColor;
+                                Console.ForegroundColor = currentBackgroundColor;
                             }
                         }
 
@@ -113,7 +113,7 @@ namespace ConditionalOperationsAndLoops_Task6
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Input error.\n");
-                                Console.ForegroundColor = currentBgColor;
+                                Console.ForegroundColor = currentBackgroundColor;
                             }
                         }
 
@@ -140,7 +140,7 @@ namespace ConditionalOperationsAndLoops_Task6
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Input error.\n");
-                                Console.ForegroundColor = currentBgColor;
+                                Console.ForegroundColor = currentBackgroundColor;
                             }
                         }
 
@@ -160,7 +160,7 @@ namespace ConditionalOperationsAndLoops_Task6
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Input error.\n");
-                                Console.ForegroundColor = currentBgColor;
+                                Console.ForegroundColor = currentBackgroundColor;
                             }
                         }
 
@@ -187,7 +187,7 @@ namespace ConditionalOperationsAndLoops_Task6
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Input error.\n");
-                                Console.ForegroundColor = currentBgColor;
+                                Console.ForegroundColor = currentBackgroundColor;
                             }
                         }
 
@@ -208,7 +208,7 @@ namespace ConditionalOperationsAndLoops_Task6
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Input error.\n");
-                                Console.ForegroundColor = currentBgColor;
+                                Console.ForegroundColor = currentBackgroundColor;
                             }
                         }
 
