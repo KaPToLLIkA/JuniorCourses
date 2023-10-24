@@ -10,12 +10,6 @@ namespace ConditionalOperationsAndLoops_Task11
     {
         public static void Main(string[] args)
         {
-            // не бейте за комментарий, я оставил на случай тестов
-            //string testCase1 = "(()(()))";
-            //string testCase2 = "(()";
-            //string testCase3 = "(()))(()";
-            //string testCase4 = ")(";
-
             Console.WriteLine($"Print brackets sequence:");
 
             string bracketsInput = Console.ReadLine();
@@ -45,6 +39,7 @@ namespace ConditionalOperationsAndLoops_Task11
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Sequence is valid");
                 Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Max depth: {maxDepth}");
             }
             else
             {
@@ -52,8 +47,6 @@ namespace ConditionalOperationsAndLoops_Task11
                 Console.WriteLine("Sequence is invalid");
                 Console.ForegroundColor = ConsoleColor.White;
             }
-
-            Console.WriteLine($"Max depth: {maxDepth}");
         }
     }
 }
