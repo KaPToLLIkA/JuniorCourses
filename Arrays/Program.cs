@@ -27,6 +27,10 @@
                     Arrays_Task2.MaxElement.Main,
                     "Max element"
                 ),
+                new CourseTask(
+                    Arrays_Task3.LocalMax.Main,
+                    "Local max"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
