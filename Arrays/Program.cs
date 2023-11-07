@@ -31,6 +31,10 @@
                     Arrays_Task3.LocalMax.Main,
                     "Local max"
                 ),
+                new CourseTask(
+                    Arrays_Task4.DynamicArray.Main,
+                    "Dynamic array"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
