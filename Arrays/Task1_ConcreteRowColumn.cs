@@ -10,7 +10,10 @@ namespace Arrays_Task1
     {
         public static void Main(string[] args)
         {
-            int[,] array = new int[7, 5];
+            int rowsCount = 7;
+            int columnsCount = 5;
+
+            int[,] array = new int[rowsCount, columnsCount];
             Random random = new Random();
             int randomMin = 1, randomMax = 10;
 
@@ -20,9 +23,9 @@ namespace Arrays_Task1
             int resultMultiplication = 1;
             int resultSumm = 0;
             
-            for (int y = 0; y < array.GetLength(0); y++)
+            for (int y = 0; y < rowsCount; y++)
             { 
-                for (int x = 0; x < array.GetLength(1); x++)
+                for (int x = 0; x < columnsCount; x++)
                 {
                     array[y, x] = random.Next(randomMin, randomMax);
 

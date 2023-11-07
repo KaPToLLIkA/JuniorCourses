@@ -23,6 +23,10 @@
                     Arrays_Task1.ConcreteRowColumn.Main,
                     "Concrete Row Column"
                 ),
+                new CourseTask(
+                    Arrays_Task2.MaxElement.Main,
+                    "Max element"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
