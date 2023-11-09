@@ -35,6 +35,10 @@
                     Arrays_Task4.DynamicArray.Main,
                     "Dynamic array"
                 ),
+                new CourseTask(
+                    Arrays_Task5.SubArray.Main,
+                    "Sub array"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
