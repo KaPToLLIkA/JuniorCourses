@@ -43,6 +43,10 @@
                     Arrays_Task6.Sort.Main,
                     "Merge sort"
                 ),
+                new CourseTask(
+                    Arrays_Task7.Split.Main,
+                    "Split"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
