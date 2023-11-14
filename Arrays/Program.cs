@@ -47,6 +47,10 @@
                     Arrays_Task7.Split.Main,
                     "Split"
                 ),
+                new CourseTask(
+                    Arrays_Task8.CyclicShift.Main,
+                    "Cyclic shift"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
