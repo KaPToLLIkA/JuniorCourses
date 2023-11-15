@@ -28,7 +28,7 @@ namespace Arrays_Task3
 
             Console.WriteLine("Local max:");
 
-            if (array[0] >= array[1])
+            if (array[0] > array[1])
             {
                 Console.WriteLine($"[{0}]:{array[0]}");
             }
@@ -38,7 +38,7 @@ namespace Arrays_Task3
                 int leftItemIndex = i - offset;
                 int rightItemIndex = i + offset;
 
-                if (array[i] >= array[leftItemIndex] && array[i] >= array[rightItemIndex])
+                if (array[i] > array[leftItemIndex] && array[i] > array[rightItemIndex])
                 {
                     Console.WriteLine($"[{i}]:{array[i]}");
                 }
@@ -47,7 +47,7 @@ namespace Arrays_Task3
             int endItemIndex = arrayLength - 1;
             int preEndItemIndex = endItemIndex - 1;
 
-            if (array[endItemIndex] >= array[preEndItemIndex])
+            if (array[endItemIndex] > array[preEndItemIndex])
             {
                 Console.WriteLine($"[{endItemIndex}]:{array[endItemIndex]}");
             }
