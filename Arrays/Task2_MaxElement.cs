@@ -43,13 +43,15 @@ namespace Arrays_Task2
             Console.WriteLine($"Max value: {maxValueInArray}");
             Console.WriteLine($"Result Array:");
 
+            int stubNumber = 0;
+
             for (int y = 0; y < rowsCount; ++y)
             {
                 for (int x = 0; x < columnsCount; ++x)
                 {
                     if (array[y, x] == maxValueInArray)
                     {
-                        array[y, x] = 0;
+                        array[y, x] = stubNumber;
                     }
 
                     Console.Write($"{array[y, x],3}, ");
