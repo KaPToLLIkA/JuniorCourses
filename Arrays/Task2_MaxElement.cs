@@ -10,30 +10,27 @@ namespace Arrays_Task2
     {
         public static void Main(string[] args)
         {
-            int rowsCount = 10;
-            int columnsCount = 10;
-
             Random random = new Random();
             int maxRandomValue = 20;
             int minRandomValue = 10;
 
             int maxValueInArray = int.MinValue;
 
-            var array = new int[rowsCount, columnsCount];
+            var array = new int[10, 10];
 
             Console.WriteLine($"Array:");
 
-            for (int y = 0; y < rowsCount; ++y)
+            for (int i = 0; i < array.GetLength(0); ++i)
             {
-                for (int x = 0; x < columnsCount; ++x)
+                for (int j = 0; j < array.GetLength(1); ++j)
                 {
-                    array[y, x] = random.Next(minRandomValue, maxRandomValue);
+                    array[i, j] = random.Next(minRandomValue, maxRandomValue);
 
-                    Console.Write($"{array[y, x],3}, ");
+                    Console.Write($"{array[i, j],3}, ");
 
-                    if (array[y, x] > maxValueInArray)
+                    if (array[i, j] > maxValueInArray)
                     {
-                        maxValueInArray = array[y, x];
+                        maxValueInArray = array[i, j];
                     }
                 }
 
@@ -43,18 +40,18 @@ namespace Arrays_Task2
             Console.WriteLine($"Max value: {maxValueInArray}");
             Console.WriteLine($"Result Array:");
 
-            int stubNumber = 0;
+            int rewriteValue = 0;
 
-            for (int y = 0; y < rowsCount; ++y)
+            for (int i = 0; i < array.GetLength(0); ++i)
             {
-                for (int x = 0; x < columnsCount; ++x)
+                for (int j = 0; j < array.GetLength(1); ++j)
                 {
-                    if (array[y, x] == maxValueInArray)
+                    if (array[i, j] == maxValueInArray)
                     {
-                        array[y, x] = stubNumber;
+                        array[i, j] = rewriteValue;
                     }
 
-                    Console.Write($"{array[y, x],3}, ");
+                    Console.Write($"{array[i, j],3}, ");
                 }
 
                 Console.WriteLine();
