@@ -14,8 +14,8 @@ namespace Arrays_Task4
             const string SummCommand = "2";
             const string ExitCommand = "0";
 
-            int arrayInitialSize = 2;
-            int arraySizeScale = 2;
+            int arrayInitialSize = 0;
+            int arraySizeDelta = 1;
             int currentArraySize = 0;
             int lastEmptyItemIndex = 0;
             
@@ -48,7 +48,7 @@ namespace Arrays_Task4
                             {
                                 Console.WriteLine("Array expanding");
 
-                                int newArraySize = array.Length * arraySizeScale;
+                                int newArraySize = array.Length + arraySizeDelta;
                                 var newArray = new int[newArraySize];
 
                                 for (int i = 0; i < array.Length; ++i)
