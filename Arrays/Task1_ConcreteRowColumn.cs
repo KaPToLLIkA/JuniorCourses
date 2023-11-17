@@ -13,33 +13,50 @@ namespace Arrays_Task1
             int rowsCount = 7;
             int columnsCount = 5;
 
-            int[,] array = new int[rowsCount, columnsCount];
+            var array = new int[rowsCount, columnsCount];
             Random random = new Random();
             int randomMin = 1, randomMax = 10;
 
             int targetRow = 1;
             int targetColumn = 0;
 
-            int resultMultiplication = 1;
-            int resultSumm = 0;
-            
-            for (int y = 0; y < rowsCount; y++)
-            { 
-                for (int x = 0; x < columnsCount; x++)
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    array[y, x] = random.Next(randomMin, randomMax);
+                    array[i, j] = random.Next(randomMin, randomMax);
 
-                    if (y == targetRow)
+                    Console.Write($"{array[i, j]} ");
+                }
+
+                Console.WriteLine("");
+            }
+
+            int resultSumm = 0;
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            { 
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (i == targetRow)
                     {
-                        resultSumm += array[y, x];
+                        resultSumm += array[i, j];
                     }
+                }
 
-                    if (x == targetColumn)
+                Console.WriteLine("");
+            }
+
+            int resultMultiplication = 1;
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (j == targetColumn)
                     {
-                        resultMultiplication *= array[y, x];
+                        resultMultiplication *= array[i, j];
                     }
-
-                    Console.Write($"{array[y, x]} ");
                 }
 
                 Console.WriteLine("");
