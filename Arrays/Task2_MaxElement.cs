@@ -16,7 +16,10 @@ namespace Arrays_Task2
 
             int maxValueInArray = int.MinValue;
 
-            var array = new int[10, 10];
+            int rowsCount = 10;
+            int columnsCount = 10;
+
+            var array = new int[columnsCount, rowsCount];
 
             Console.WriteLine($"Array:");
 
