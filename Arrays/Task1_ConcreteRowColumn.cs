@@ -45,8 +45,6 @@ namespace Arrays_Task1
             for (int i = 0; i < array.GetLength(0); i++)
             {
                 resultMultiplication *= array[i, targetColumn];
-
-                Console.WriteLine("");
             }
 
             Console.WriteLine($"Mul: {resultMultiplication}, Sum: {resultSumm}");
