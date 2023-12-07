@@ -15,7 +15,8 @@ namespace Arrays_Task1
 
             var array = new int[rowsCount, columnsCount];
             Random random = new Random();
-            int randomMin = 1, randomMax = 10;
+            int randomMin = 1;
+            int randomMax = 10;
 
             int targetRow = 1;
             int targetColumn = 0;
@@ -34,30 +35,16 @@ namespace Arrays_Task1
 
             int resultSumm = 0;
 
-            for (int i = 0; i < array.GetLength(0); i++)
-            { 
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    if (i == targetRow)
-                    {
-                        resultSumm += array[i, j];
-                    }
-                }
-
-                Console.WriteLine("");
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                resultSumm += array[targetRow, j];
             }
 
             int resultMultiplication = 1;
 
             for (int i = 0; i < array.GetLength(0); i++)
             {
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    if (j == targetColumn)
-                    {
-                        resultMultiplication *= array[i, j];
-                    }
-                }
+                resultMultiplication *= array[i, targetColumn];
 
                 Console.WriteLine("");
             }
