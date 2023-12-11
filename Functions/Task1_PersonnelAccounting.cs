@@ -9,19 +9,16 @@ namespace Functions_Task1
 {
     internal class PersonnelAccounting
     {
-        private const string AddAccountCommand = "1";
-        private const string DeleteAccountCommand = "2";
-        private const string PrintAllAccountsCommand = "3";
-        private const string FindAccountByUserNameCommand = "4";
-
-        private const string YesCommand = "yes";
-        private const string NoCommand = "no";
-
         public static void Main(string[] args)
         {
-            var exitCommand = "0";
+            const string AddAccountCommand = "1";
+            const string DeleteAccountCommand = "2";
+            const string PrintAllAccountsCommand = "3";
+            const string FindAccountByUserNameCommand = "4";
 
-            var availableCommands = new string[]
+            string exitCommand = "0";
+
+            string[] availableCommands = new string[]
             {
                 AddAccountCommand,
                 DeleteAccountCommand,
@@ -30,29 +27,32 @@ namespace Functions_Task1
                 exitCommand,
             };
 
-            var commandsDescriptions = new string[]
+            string[] commandsDescriptions = new string[]
             {
                 "Add new account",
                 "Delete account by id",
                 "Print all accounts",
-                "Find account by user name",
+                "Find account by Last Name",
                 "Exit"
             };
 
-            var personnelFullNames = new string[] 
+            string[] personnelFullNames = new string[] 
             { 
                 "Ivanov Ivan Ivanovich",
                 "Petrov Vasya Pupkin",
+                "Petrov Vitya Who",
                 "Kolopuev Igor Nikolaevich"
             };
-            var personnelPositions = new string[]
+
+            string[] personnelPositions = new string[]
             {
                 "Team lead",
+                "Grandpa",
                 "CEO",
                 "Lead ingeneer"
             };
 
-            var isRunning = true;
+            bool isRunning = true;
 
             while (isRunning)
             {
@@ -60,7 +60,24 @@ namespace Functions_Task1
                 
                 string recognizedCommand = ProcessCommandsInput(availableCommands);
 
-                ProcessMenuCommand(recognizedCommand, ref personnelFullNames, ref personnelPositions);
+                switch (recognizedCommand)
+                {
+                    case AddAccountCommand:
+                        AddAccountCommandProcess(ref personnelFullNames, ref personnelPositions);
+                        break;
+
+                    case DeleteAccountCommand:
+                        DeleteAccountCommandProcess(ref personnelFullNames, ref personnelPositions);
+                        break;
+
+                    case PrintAllAccountsCommand:
+                        PrintAllAccounts(personnelFullNames, personnelPositions);
+                        break;
+
+                    case FindAccountByUserNameCommand:
+                        FindCommandProcess(ref personnelFullNames, ref personnelPositions);
+                        break;
+                }
 
                 isRunning = recognizedCommand != exitCommand;
             }
@@ -86,8 +103,8 @@ namespace Functions_Task1
 
         private static string ProcessCommandsInput(string[] availableCommands)
         {
-            var isCommandInvalid = true;
-            var recognizedCommand = string.Empty;
+            bool isCommandInvalid = true;
+            string recognizedCommand = string.Empty;
 
             while (isCommandInvalid)
             {
@@ -111,43 +128,18 @@ namespace Functions_Task1
             return recognizedCommand;
         }
 
-        private static void ProcessMenuCommand(string command, ref string[] personnelFullNames, ref string[] personnelPositions)
-        {
-            switch (command)
-            {
-                case AddAccountCommand:
-                    AddAccountCommandProcess(ref personnelFullNames, ref personnelPositions);
-                    break;
-
-                case DeleteAccountCommand:
-                    DeleteAccountCommandProcess(ref personnelFullNames, ref personnelPositions);
-                    break;
-
-                case PrintAllAccountsCommand:
-                    PrintAllAccounts(personnelFullNames, personnelPositions);
-                    break;
-
-                case FindAccountByUserNameCommand:
-                    FindCommandProcess(ref personnelFullNames, ref personnelPositions);
-                    break;
-            }
-        }
-
         private static void AddAccountCommandProcess(ref string[] personnelFullNames, ref string[] personnelPositions)
         {
-            Console.WriteLine("Print user: First Name, Last Name, Patronymic");
+            Console.WriteLine("Print user: Last Name, First Name, Patronymic");
 
-            string fullName = Console.ReadLine();
+            string fullName = Console.ReadLine() ?? "";
 
             Console.WriteLine("Print personnel position:");
 
-            string position = Console.ReadLine();
-
-            personnelFullNames = ResizeArray(personnelFullNames, personnelFullNames.Length + 1);
-            personnelPositions = ResizeArray(personnelPositions, personnelPositions.Length + 1);
-
-            personnelFullNames[personnelFullNames.Length - 1] = fullName;
-            personnelPositions[personnelPositions.Length - 1] = position;
+            string position = Console.ReadLine() ?? "";
+           
+            personnelFullNames = AddItemToArray(personnelFullNames, fullName);
+            personnelPositions = AddItemToArray(personnelPositions, position);
         }
 
         private static void DeleteAccountCommandProcess(ref string[] personnelFullNames, ref string[] personnelPositions)
@@ -156,8 +148,8 @@ namespace Functions_Task1
 
             PrintAllAccounts(personnelFullNames, personnelPositions);
 
-            var startMessage = "Print ID of personnel to remove:";
-            var onErrorMessage = "Error. Try again.";
+            string startMessage = "Print ID of personnel to remove:";
+            string onErrorMessage = "Error. Try again.";
 
             int id = GetIntFromConsoleInput(startMessage, onErrorMessage);
 
@@ -168,12 +160,12 @@ namespace Functions_Task1
         {
             Console.Clear();
 
-            var idTitle = "ID";
-            var fullNameTitle = "Full name";
-            var positionTitle = "Position";
+            string idTitle = "ID";
+            string fullNameTitle = "Full name";
+            string positionTitle = "Position";
 
-            var separatorFiller = '=';
-            var headerSeparator = new string(separatorFiller, Console.BufferWidth);
+            char separatorFiller = '=';
+            string headerSeparator = new(separatorFiller, Console.BufferWidth);
 
             Console.WriteLine($"{idTitle,4} : {fullNameTitle} - {positionTitle}");
             Console.WriteLine(headerSeparator);
@@ -188,63 +180,53 @@ namespace Functions_Task1
         {
             Console.Clear();
 
-            var yesOrNoCommands = new string[]
-            {
-                YesCommand,
-                NoCommand,
-            };
+            int[] foundIds = FindAccountIdsByLastName(personnelFullNames, personnelPositions);
 
-            var yesOrNoCommandsDescriptions = new string[]
-            {
-                "Delete this account",
-                "Do nothing"
-            };
-
-            int errorValue = -1;
-            int foundId = FindAccountIdByFullName(personnelFullNames, personnelPositions);
-
-            if (foundId == errorValue)
+            if (foundIds.Length == 0)
             {
                 PrintErrorMessage("Account with this FULL NAME does not exist");
             }
             else
             {
-                Console.WriteLine("Found account:");
-                Console.WriteLine($"{personnelFullNames[foundId]} - {personnelPositions[foundId]}");
+                Console.WriteLine("Found accounts:");
 
-                Console.WriteLine("Do you want to delete this account?");
-
-                PrintMenu(yesOrNoCommands, yesOrNoCommandsDescriptions);
-
-                string recognizedCommand = ProcessCommandsInput(yesOrNoCommands);
-
-                if (recognizedCommand == YesCommand)
+                foreach (int foundId in foundIds)
                 {
-                    DeleteAccountById(foundId, ref personnelFullNames, ref personnelPositions);
+                    Console.WriteLine($"{personnelFullNames[foundId]} - {personnelPositions[foundId]}");
                 }
             }
         }
 
-        public static int FindAccountIdByFullName(string[] personnelFullNames, string[] personnelPositions)
+        public static int[] FindAccountIdsByLastName(string[] personnelFullNames, string[] personnelPositions)
         {
-            int errorValue = -1;
-            int requestedAccountId = errorValue;
+            int[] foundIds = new int[0];
 
             Console.WriteLine("Search request building...");
-            Console.WriteLine("Print user: First Name, Last Name, Patronymic");
+            Console.WriteLine("Print user Last Name");
 
-            string fullName = Console.ReadLine();
+            string targetLastName = Console.ReadLine();
+            string lowerTargetLastName = targetLastName.ToLower();
+
+            int lastNameIndex = 0;
+            char fullNameSeparator = ' ';
 
             for (int i = 0; i < personnelFullNames.Length; ++i)
             {
-                if (personnelFullNames[i].Contains(fullName))
+                string[] fullNameComponents = personnelFullNames[i].Split(fullNameSeparator);
+                
+
+                if (fullNameComponents.Length > lastNameIndex)
                 {
-                    requestedAccountId = i;
-                    break;
+                    string lowerLastName = fullNameComponents[lastNameIndex].ToLower();
+
+                    if (lowerLastName.Contains(lowerTargetLastName))
+                    {
+                        foundIds = AddItemToArray(foundIds, i);
+                    }
                 }
             }
 
-            return requestedAccountId;
+            return foundIds;
         }
 
         public static void DeleteAccountById(int id, ref string[] personnelFullNames, ref string[] personnelPositions)
@@ -261,29 +243,9 @@ namespace Functions_Task1
                 PrintErrorMessage("Requested ID does not exist");
             }
         }
-
-        private static T[] ResizeArray<T>(T[] array, int newSize)
-        {
-            Array.Resize(ref array, newSize);
-            return array;
-        }
-
-        private static T[] RemoveItemFromArray<T>(T[] array, int itemIndex)
-        {
-            var tmpArray = new T[array.Length - 1];
-
-            int leftPartLength = itemIndex;
-            int rightPartLength = array.Length - leftPartLength - 1;
-
-            Array.Copy(array, 0, tmpArray, 0, leftPartLength);
-            Array.Copy(array, itemIndex + 1, tmpArray, itemIndex, rightPartLength);
-
-            return tmpArray;
-        }
-
         private static int GetIntFromConsoleInput(string startMessage, string onErrorMessage)
         {
-            var isInputInvalid = true;
+            bool isInputInvalid = true;
 
             int parsedValue = 0;
 
@@ -293,7 +255,7 @@ namespace Functions_Task1
 
                 string input = Console.ReadLine();
 
-                if (Int32.TryParse(input, out parsedValue))
+                if (int.TryParse(input, out parsedValue))
                 {
                     isInputInvalid = false;
                 }
@@ -315,5 +277,63 @@ namespace Functions_Task1
 
             Console.ForegroundColor = currentColor;
         }
+
+        #region arrays
+
+        private static T[] AddItemToArray<T>(T[] array, T item)
+        {
+            T[] newArray = ArrayResize(array, array.Length + 1);
+            newArray[newArray.Length - 1] = item;
+
+            return newArray;
+        }
+
+        private static T[] RemoveItemFromArray<T>(T[] array, int itemIndex)
+        {
+            var tmpArray = new T[array.Length - 1];
+
+            int leftPartLength = itemIndex;
+            int rightPartLength = array.Length - leftPartLength - 1;
+
+            ArrayCopy(array, 0, tmpArray, 0, leftPartLength);
+            ArrayCopy(array, itemIndex + 1, tmpArray, itemIndex, rightPartLength);
+
+            return tmpArray;
+        }
+
+        private static T[] ArrayResize<T>(T[] array, int newSize)
+        {
+            T[] newArray = new T[newSize];
+
+            ArrayCopy(array, 0, newArray, 0, array.Length);
+
+            return newArray;
+        }
+
+        private static void ArrayCopy<T>(
+            T[] source,
+            int sourceIndex,
+            T[] destination,
+            int destinationIndex,
+            int length)
+        {
+            int sourceRightBorder = sourceIndex + length;
+            int destinationRightBorder = destinationIndex + length;
+
+            if (sourceRightBorder > source.Length 
+                || destinationRightBorder > destination.Length)
+            {
+                throw new IndexOutOfRangeException(
+                    $"Source - border: {sourceRightBorder}, length: {source.Length}" +
+                    $"Destination - border: {destinationRightBorder}, length: {destination.Length}");
+            }
+
+            for (int i = 0; i < length; ++i)
+            {
+                destination[destinationIndex++] = source[sourceIndex++];
+            }
+        }
+
+        #endregion
     }
 }
