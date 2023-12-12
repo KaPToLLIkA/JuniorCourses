@@ -43,15 +43,19 @@ namespace Functions_Task4
                     case ConsoleKey.UpArrow:
                         newPlayerY -= 1;
                         break;
+
                     case ConsoleKey.DownArrow:
                         newPlayerY += 1;
                         break;
+
                     case ConsoleKey.RightArrow:
                         newPlayerX += 1;
                         break;
+
                     case ConsoleKey.LeftArrow:
                         newPlayerX -= 1;
                         break;
+
                     default:
                         break;
                 }
