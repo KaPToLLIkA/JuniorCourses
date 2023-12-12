@@ -27,6 +27,10 @@
                     Functions_Task2.UIElement.Main,
                     "UIElement"
                 ),
+                new CourseTask(
+                    Functions_Task3.GetInt.Main,
+                    "GetInt"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
