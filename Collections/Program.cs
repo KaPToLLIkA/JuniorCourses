@@ -27,6 +27,10 @@
                     Collections_Task2.Clients.Main,
                     "Clients"
                 ),
+                new CourseTask(
+                    Collections_Task3.DynamicArray.Main,
+                    "Dynamic array"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
