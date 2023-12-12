@@ -35,6 +35,10 @@
                     Collections_Task4.PersonnelAccounting.Main,
                     "Personnel accounting"
                 ),
+                new CourseTask(
+                    Collections_Task5.Merge.Main,
+                    "Merge"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
