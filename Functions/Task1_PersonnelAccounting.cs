@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 
 namespace Functions_Task1
 {
@@ -63,11 +58,11 @@ namespace Functions_Task1
                 switch (recognizedCommand)
                 {
                     case AddAccountCommand:
-                        AddAccountCommandProcess(ref personnelFullNames, ref personnelPositions);
+                        AddAccount(ref personnelFullNames, ref personnelPositions);
                         break;
 
                     case DeleteAccountCommand:
-                        DeleteAccountCommandProcess(ref personnelFullNames, ref personnelPositions);
+                        DeleteAccount(ref personnelFullNames, ref personnelPositions);
                         break;
 
                     case PrintAllAccountsCommand:
@@ -75,7 +70,7 @@ namespace Functions_Task1
                         break;
 
                     case FindAccountByUserNameCommand:
-                        FindCommandProcess(personnelFullNames, personnelPositions);
+                        PrintFoundedAccounts(personnelFullNames, personnelPositions);
                         break;
                 }
 
@@ -128,7 +123,7 @@ namespace Functions_Task1
             return recognizedCommand;
         }
 
-        private static void AddAccountCommandProcess(ref string[] personnelFullNames, ref string[] personnelPositions)
+        private static void AddAccount(ref string[] personnelFullNames, ref string[] personnelPositions)
         {
             Console.WriteLine("Print user: Last Name, First Name, Patronymic");
 
@@ -142,7 +137,7 @@ namespace Functions_Task1
             personnelPositions = AddItemToArray(personnelPositions, position);
         }
 
-        private static void DeleteAccountCommandProcess(ref string[] personnelFullNames, ref string[] personnelPositions)
+        private static void DeleteAccount(ref string[] personnelFullNames, ref string[] personnelPositions)
         {
             Console.Clear();
 
@@ -176,7 +171,7 @@ namespace Functions_Task1
             }
         }
 
-        public static void FindCommandProcess(string[] personnelFullNames, string[] personnelPositions)
+        public static void PrintFoundedAccounts(string[] personnelFullNames, string[] personnelPositions)
         {
             Console.Clear();
 
@@ -213,7 +208,6 @@ namespace Functions_Task1
             for (int i = 0; i < personnelFullNames.Length; ++i)
             {
                 string[] fullNameComponents = personnelFullNames[i].Split(fullNameSeparator);
-                
 
                 if (fullNameComponents.Length > lastNameIndex)
                 {
@@ -282,7 +276,7 @@ namespace Functions_Task1
 
         private static T[] AddItemToArray<T>(T[] array, T item)
         {
-            T[] newArray = ArrayResize(array, array.Length + 1);
+            T[] newArray = ResizeArray(array, array.Length + 1);
             newArray[newArray.Length - 1] = item;
 
             return newArray;
@@ -295,22 +289,22 @@ namespace Functions_Task1
             int leftPartLength = itemIndex;
             int rightPartLength = array.Length - leftPartLength - 1;
 
-            ArrayCopy(array, 0, tmpArray, 0, leftPartLength);
-            ArrayCopy(array, itemIndex + 1, tmpArray, itemIndex, rightPartLength);
+            CopyArray(array, 0, tmpArray, 0, leftPartLength);
+            CopyArray(array, itemIndex + 1, tmpArray, itemIndex, rightPartLength);
 
             return tmpArray;
         }
 
-        private static T[] ArrayResize<T>(T[] array, int newSize)
+        private static T[] ResizeArray<T>(T[] array, int newSize)
         {
             T[] newArray = new T[newSize];
 
-            ArrayCopy(array, 0, newArray, 0, array.Length);
+            CopyArray(array, 0, newArray, 0, array.Length);
 
             return newArray;
         }
 
-        private static void ArrayCopy<T>(
+        private static void CopyArray<T>(
             T[] source,
             int sourceIndex,
             T[] destination,
