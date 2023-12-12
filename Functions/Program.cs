@@ -31,6 +31,10 @@
                     Functions_Task3.GetInt.Main,
                     "GetInt"
                 ),
+                new CourseTask(
+                    Functions_Task4.BraveNewWorld.Main,
+                    "Brave new world"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
