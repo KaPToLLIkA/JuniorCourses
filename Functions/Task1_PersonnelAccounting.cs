@@ -75,7 +75,7 @@ namespace Functions_Task1
                         break;
 
                     case FindAccountByUserNameCommand:
-                        FindCommandProcess(ref personnelFullNames, ref personnelPositions);
+                        FindCommandProcess(personnelFullNames, personnelPositions);
                         break;
                 }
 
@@ -176,11 +176,11 @@ namespace Functions_Task1
             }
         }
 
-        public static void FindCommandProcess(ref string[] personnelFullNames, ref string[] personnelPositions)
+        public static void FindCommandProcess(string[] personnelFullNames, string[] personnelPositions)
         {
             Console.Clear();
 
-            int[] foundIds = FindAccountIdsByLastName(personnelFullNames, personnelPositions);
+            int[] foundIds = FindAccountIdsByLastName(personnelFullNames);
 
             if (foundIds.Length == 0)
             {
@@ -197,7 +197,7 @@ namespace Functions_Task1
             }
         }
 
-        public static int[] FindAccountIdsByLastName(string[] personnelFullNames, string[] personnelPositions)
+        public static int[] FindAccountIdsByLastName(string[] personnelFullNames)
         {
             int[] foundIds = new int[0];
 
