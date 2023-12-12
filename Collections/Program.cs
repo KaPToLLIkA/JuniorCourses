@@ -23,6 +23,10 @@
                     Collections_Task1.Dictionary.Main,
                     "Dictionary"
                 ),
+                new CourseTask(
+                    Collections_Task2.Clients.Main,
+                    "Clients"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
