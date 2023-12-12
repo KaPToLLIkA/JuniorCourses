@@ -35,6 +35,10 @@
                     Functions_Task4.BraveNewWorld.Main,
                     "Brave new world"
                 ),
+                new CourseTask(
+                    Functions_Task5.Shuffle.Main,
+                    "Shuffle"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
