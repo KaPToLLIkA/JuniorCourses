@@ -23,6 +23,10 @@
                     Functions_Task1.PersonnelAccounting.Main,
                     "Personnel accounting"
                 ),
+                new CourseTask(
+                    Functions_Task2.UIElement.Main,
+                    "UIElement"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
