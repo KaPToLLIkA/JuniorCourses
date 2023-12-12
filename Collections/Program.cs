@@ -20,8 +20,8 @@
             var courseTasks = new List<CourseTask>
             {
                 new CourseTask(
-                    Main,
-                    "Personnel accounting"
+                    Collections_Task1.Dictionary.Main,
+                    "Dictionary"
                 ),
             };
 
