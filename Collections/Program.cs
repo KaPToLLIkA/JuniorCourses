@@ -31,6 +31,10 @@
                     Collections_Task3.DynamicArray.Main,
                     "Dynamic array"
                 ),
+                new CourseTask(
+                    Collections_Task4.PersonnelAccounting.Main,
+                    "Personnel accounting"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
