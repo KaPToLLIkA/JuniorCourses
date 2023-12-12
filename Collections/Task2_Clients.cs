@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Collections_Task2
+﻿namespace Collections_Task2
 {
     internal class Clients
     {
