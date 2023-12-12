@@ -290,7 +290,7 @@ namespace Functions_Task1
 
         private static T[] RemoveItemFromArray<T>(T[] array, int itemIndex)
         {
-            var tmpArray = new T[array.Length - 1];
+            T[] tmpArray = new T[array.Length - 1];
 
             int leftPartLength = itemIndex;
             int rightPartLength = array.Length - leftPartLength - 1;
