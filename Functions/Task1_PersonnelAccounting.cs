@@ -237,6 +237,7 @@ namespace Functions_Task1
                 PrintErrorMessage("Requested ID does not exist");
             }
         }
+
         private static int GetIntFromConsoleInput(string startMessage, string onErrorMessage)
         {
             bool isInputInvalid = true;
