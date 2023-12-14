@@ -14,36 +14,97 @@ namespace Functions_Task2
             int delayPerFrame = 100;
             bool isRunning = true;
 
-            float minValue = 0f;
-            float maxValue = 2230f;
-            float deltaValue = 60f;
+            float minHealthValue = 0f;
+            float maxHealthValue = 2230f;
+            float deltaHealtValue = 60f;
+            float currentHealthValue = minHealthValue;
+
+            float minManaValue = 0f;
+            float maxManaValue = 11350f;
+            float deltaManaValue = 100f;
+            float currentManaValue = minManaValue;
 
             while (isRunning)
             {
-                float currentValue = minValue;
+                currentHealthValue = Math.Clamp(currentHealthValue + deltaHealtValue, minHealthValue, maxHealthValue);
+                currentManaValue = Math.Clamp(currentManaValue + deltaManaValue, minManaValue, maxManaValue);
 
-                while (currentValue < maxValue)
+                PrintHealthBar(
+                    currentHealthValue,
+                    maxHealthValue,
+                    left: 10,
+                    top: 10,
+                    barLength: 40);
+
+                PrintManaBar(
+                    currentManaValue,
+                    maxManaValue,
+                    left: 10,
+                    top: 12,
+                    barLength: 40);
+
+                if (currentHealthValue + float.Epsilon >= maxHealthValue)
                 {
-                    currentValue = Math.Clamp(currentValue + deltaValue, minValue, maxValue);
-
-                    PrintHealthBar(
-                        currentValue,
-                        maxValue,
-                        left: 10,
-                        top: 20,
-                        barLength: 40);
-
-                    Thread.Sleep(delayPerFrame);
-                    Console.Clear();
+                    currentHealthValue = minHealthValue;
                 }
+
+                if (currentManaValue + float.Epsilon >= maxManaValue)
+                {
+                    currentManaValue = minManaValue;
+                }
+
+                Thread.Sleep(delayPerFrame);
+                Console.Clear();
             }
         }
 
         private static void PrintHealthBar(
             float currentValue,
             float maxValue,
-            ConsoleColor backgroundColor = ConsoleColor.Green,
-            ConsoleColor foregroundColor = ConsoleColor.Yellow,
+            int left,
+            int top,
+            int barLength
+            )
+        {
+            ConsoleColor backgroundColor = ConsoleColor.Yellow;
+            ConsoleColor foregroundColor = ConsoleColor.Green;
+
+            PrintBar(
+                currentValue,
+                maxValue,
+                backgroundColor,
+                foregroundColor,
+                left,
+                top,
+                barLength);
+        }
+
+        private static void PrintManaBar(
+            float currentValue,
+            float maxValue,
+            int left,
+            int top,
+            int barLength
+            )
+        {
+            ConsoleColor backgroundColor = ConsoleColor.Yellow;
+            ConsoleColor foregroundColor = ConsoleColor.Blue;
+
+            PrintBar(
+                currentValue,
+                maxValue,
+                backgroundColor,
+                foregroundColor,
+                left,
+                top,
+                barLength);
+        }
+
+        private static void PrintBar(
+            float currentValue,
+            float maxValue,
+            ConsoleColor backgroundColor,
+            ConsoleColor foregroundColor,
             int left = 0,
             int top = 0,
             int barLength = 30,
