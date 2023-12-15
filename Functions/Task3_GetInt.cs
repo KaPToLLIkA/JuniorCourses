@@ -1,56 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Functions_Task3
+﻿namespace Functions_Task3
 {
     internal class GetInt
     {
         public static void Main(string[] args)
         {
             string startMessage = "Print int value:";
-            string onErrorMessage = "Wrong value. Try again.";
 
-            int parsedValue = GetIntFromConsoleInput(startMessage, onErrorMessage);
+            int parsedValue = GetIntFromConsoleInput(startMessage);
 
             Console.WriteLine($"Your value: {parsedValue}");
         }
 
-        private static int GetIntFromConsoleInput(string startMessage, string onErrorMessage)
+        private static int GetIntFromConsoleInput(string startMessage)
         {
-            bool isInputInvalid = true;
+            int parsedValue;
+            string input;
 
-            int parsedValue = 0;
-
-            while (isInputInvalid)
+            do
             {
                 Console.WriteLine(startMessage);
 
-                string input = Console.ReadLine();
+                input = Console.ReadLine();
 
-                if (int.TryParse(input, out parsedValue))
-                {
-                    isInputInvalid = false;
-                }
-                else
-                {
-                    PrintErrorMessage(onErrorMessage);
-                }
-            }
+            } while (!int.TryParse(input, out parsedValue));
 
             return parsedValue;
-        }
-
-        private static void PrintErrorMessage(string message)
-        {
-            ConsoleColor currentColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Red;
-
-            Console.WriteLine(message);
-
-            Console.ForegroundColor = currentColor;
         }
     }
 }
