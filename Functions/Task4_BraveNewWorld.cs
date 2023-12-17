@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace Functions_Task4
 {
@@ -19,10 +20,7 @@ namespace Functions_Task4
             ConsoleColor backgroundColor = ConsoleColor.Black;
 
             char[,] map = GenerateRandomMap(height, width, emptyCell, wallCell);
-            Tuple<int, int> playerPosition = GetRandomValidPlayerPosition(map, wallCell);
-
-            int playerX = playerPosition.Item1;
-            int playerY = playerPosition.Item2;
+            Vector2 playerPosition = GetRandomValidPlayerPosition(map, wallCell);
 
             bool isGameRunning = true;
 
@@ -31,41 +29,62 @@ namespace Functions_Task4
                 Console.Clear();
 
                 DrawMap(map, mapColor, backgroundColor);
-                DrawPlayer(playerX, playerY, player, playerColor, backgroundColor);
+                DrawPlayer(playerPosition, player, playerColor, backgroundColor);
 
-                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                Vector2 movement = GetPlayerMovement();
 
-                int newPlayerX = playerX;
-                int newPlayerY = playerY;
-
-                switch (keyInfo.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        newPlayerY -= 1;
-                        break;
-
-                    case ConsoleKey.DownArrow:
-                        newPlayerY += 1;
-                        break;
-
-                    case ConsoleKey.RightArrow:
-                        newPlayerX += 1;
-                        break;
-
-                    case ConsoleKey.LeftArrow:
-                        newPlayerX -= 1;
-                        break;
-
-                    default:
-                        break;
-                }
-
-                if (map[newPlayerY, newPlayerX] != wallCell)
-                {
-                    playerX = newPlayerX;
-                    playerY = newPlayerY;
-                }
+                playerPosition = MovePlayer(playerPosition, movement, map, wallCell);
             }
+        }
+
+        private static Vector2 MovePlayer(Vector2 playerPosition, Vector2 movement, char[,] map, char wallCell)
+        {
+            Vector2 newPlayerPosition = playerPosition + movement;
+
+            if (map[(int)newPlayerPosition.Y, (int)newPlayerPosition.X] != wallCell)
+            {
+                return newPlayerPosition;
+            }
+            else
+            {
+                return playerPosition;
+            }
+        }
+
+        private static Vector2 GetPlayerMovement()
+        {
+            const ConsoleKey MoveUpKey = ConsoleKey.UpArrow;
+            const ConsoleKey MoveDownKey = ConsoleKey.DownArrow;
+            const ConsoleKey MoveLeftKey = ConsoleKey.LeftArrow;
+            const ConsoleKey MoveRightKey = ConsoleKey.RightArrow;
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+            Vector2 movement = Vector2.Zero;
+
+            switch (keyInfo.Key)
+            {
+                case MoveUpKey:
+                    movement.Y = -1;
+                    break;
+
+                case MoveDownKey:
+                    movement.Y = 1;
+                    break;
+
+                case MoveRightKey:
+                    movement.X = 1;
+                    break;
+
+                case MoveLeftKey:
+                    movement.X = -1;
+                    break;
+
+                default:
+                    break;
+            }
+
+            return movement;
         }
 
         private static void DrawMap(
@@ -92,8 +111,7 @@ namespace Functions_Task4
         }
 
         private static void DrawPlayer(
-            int x,
-            int y,
+            Vector2 playerPos,
             char player,
             ConsoleColor foregroundColor,
             ConsoleColor backgroundColor)
@@ -104,14 +122,14 @@ namespace Functions_Task4
             Console.ForegroundColor = foregroundColor;
             Console.BackgroundColor = backgroundColor;
 
-            Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition((int)playerPos.X, (int)playerPos.Y);
             Console.Write(player);
 
             Console.ForegroundColor = curForegroundColor;
             Console.BackgroundColor = curBackgroundColor;
         }
 
-        private static Tuple<int, int> GetRandomValidPlayerPosition(char[,] map, char wallCell)
+        private static Vector2 GetRandomValidPlayerPosition(char[,] map, char wallCell)
         {
             Random random = new();
 
@@ -137,7 +155,7 @@ namespace Functions_Task4
                 }
             }
 
-            return new Tuple<int, int>(x, y);
+            return new Vector2(x, y);
         }
 
         #region map
