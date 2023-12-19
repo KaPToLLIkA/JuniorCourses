@@ -37,7 +37,7 @@ namespace Functions_Task5
 
         private static void ShuffleArray<T>(T[] array, Random random)
         {
-            int[] indexes = new int[array.GetLength(0)];
+            int[] indexes = new int[array.Length];
 
             for (int i = 0; i < indexes.Length; i++)
             {
@@ -76,15 +76,15 @@ namespace Functions_Task5
         {
             int itemIndex = GetItemIndexInArray(array, item);
 
-            T[] tmpArray = new T[array.Length - 1];
+            T[] newArray = new T[array.Length - 1];
 
             int leftPartLength = itemIndex;
             int rightPartLength = array.Length - leftPartLength - 1;
 
-            CopyArray(array, 0, tmpArray, 0, leftPartLength);
-            CopyArray(array, itemIndex + 1, tmpArray, itemIndex, rightPartLength);
+            CopyArray(array, 0, newArray, 0, leftPartLength);
+            CopyArray(array, itemIndex + 1, newArray, itemIndex, rightPartLength);
 
-            return tmpArray;
+            return newArray;
         }
 
         private static int GetItemIndexInArray<T>(T[] array, T item)
