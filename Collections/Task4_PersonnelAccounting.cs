@@ -18,12 +18,12 @@
                 exitCommand,
             };
 
-            string[] commandsDescriptions = new string[]
+            Dictionary<string, string> commandsDescriptions = new()
             {
-                "Add new account",
-                "Delete account by id",
-                "Print all accounts",
-                "Exit"
+                {AddAccountCommand, "Add new account"},
+                {DeleteAccountCommand, "Delete account by id"},
+                {PrintAllAccountsCommand, "Print all accounts"},
+                {exitCommand, "Exit"},
             };
 
             List<string> personnelFullNames = new()
@@ -46,7 +46,7 @@
 
             while (isRunning)
             {
-                PrintMenu(availableCommands, commandsDescriptions);
+                PrintMenu(commandsDescriptions);
 
                 string recognizedCommand = ProcessCommandsInput(availableCommands);
 
@@ -69,7 +69,7 @@
             }
         }
 
-        private static void PrintMenu(string[] availableCommands, string[] commandsDescriptions)
+        private static void PrintMenu(Dictionary<string, string> commandsDescriptions)
         {
             ConsoleColor currentColor = Console.ForegroundColor;
 
@@ -79,9 +79,9 @@
 
             Console.ForegroundColor = ConsoleColor.Magenta;
 
-            for (int i = 0; i < availableCommands.Length; i++)
+            foreach (KeyValuePair<string, string> keyValue in commandsDescriptions)
             {
-                Console.WriteLine($"{availableCommands[i]} : {commandsDescriptions[i]}");
+                Console.WriteLine($"{keyValue.Key} : {keyValue.Value}");
             }
 
             Console.ForegroundColor = currentColor;
