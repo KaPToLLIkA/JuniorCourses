@@ -1,7 +1,4 @@
-﻿using System;
-using System.Security;
-
-namespace Collections_Task3
+﻿namespace Collections_Task3
 {
     internal class DynamicArray
     {
@@ -9,20 +6,11 @@ namespace Collections_Task3
         {
             const string ExitCommand = "E";
             const string SummCommand = "S";
-            const string AddValueCommand = "A";
 
             Dictionary<string, string> commandsDescriptions = new()
             {
                 {SummCommand, "Summ all numbers"},
-                {AddValueCommand, "Add value"},
                 {ExitCommand, "Exit"},
-            };
-
-            List<string> availableCommands = new()
-            {
-                ExitCommand,
-                AddValueCommand,
-                SummCommand,
             };
 
             List<int> inputedValues = new();
@@ -33,22 +21,24 @@ namespace Collections_Task3
             {
                 PrintMenu(commandsDescriptions);
 
-                string commandsInput = GetCommandFromConsoleInput(availableCommands);
-                
+                string commandsInput = Console.ReadLine();
+
                 switch (commandsInput)
                 {
                     case SummCommand:
-                        ProcessSummCommand(inputedValues);
-                        break;
-
-                    case AddValueCommand:
-                        int value = GetIntFromConsoleInput("Print value:");
-
-                        inputedValues.Add(value);
+                        SummValues(inputedValues);
                         break;
 
                     case ExitCommand:
                         isRunning = false;
+                        break;
+
+                    default:
+
+                        if(int.TryParse(commandsInput, out int parsedValue))
+                        {
+                            inputedValues.Add(parsedValue);
+                        }
                         break;
                 }
             }
@@ -64,37 +54,7 @@ namespace Collections_Task3
             }
         }
 
-        private static string GetCommandFromConsoleInput(List<string> availableCommands)
-        {
-            string inputedCommand = "";
-
-            while (!availableCommands.Contains(inputedCommand))
-            {
-                Console.WriteLine("Print command:");
-
-                inputedCommand = Console.ReadLine();
-            }
-
-            return inputedCommand;
-        }
-
-        private static int GetIntFromConsoleInput(string startMessage)
-        {
-            int parsedValue;
-            string input;
-
-            do
-            {
-                Console.WriteLine(startMessage);
-
-                input = Console.ReadLine();
-
-            } while (!int.TryParse(input, out parsedValue));
-
-            return parsedValue;
-        }
-
-        private static void ProcessSummCommand(List<int> values)
+        private static void SummValues(List<int> values)
         {
             int summ = 0;
 
