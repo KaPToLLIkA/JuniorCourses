@@ -20,8 +20,32 @@
             var courseTasks = new List<CourseTask>
             {
                 new CourseTask(
+                    Fundamentals_Task1.Variables.Main,
+                    "Variables"
+                ),
+                new CourseTask(
                     Main,
-                    "Concrete Row Column"
+                    "-------"
+                ),
+                new CourseTask(
+                    Fundamentals_Task3.Strings.Main,
+                    "Strings"
+                ),
+                new CourseTask(
+                    Fundamentals_Task4.Images.Main,
+                    "Images"
+                ),
+                new CourseTask(
+                    Fundamentals_Task5.Swap.Main,
+                    "Swap"
+                ),
+                new CourseTask(
+                    Fundamentals_Task6.Shop.Main,
+                    "Shop"
+                ),
+                new CourseTask(
+                    Fundamentals_Task7.Clinic.Main,
+                    "Clinic"
                 ),
             };
 
