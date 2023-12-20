@@ -19,10 +19,22 @@
         {
             var courseTasks = new List<CourseTask>
             {
-                null,
-                null,
-                null,
-                null,
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task1.Loop.Main,
+                    "Loop"
+                ),
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task2.Exit.Main,
+                    "Exit"
+                ),
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task3.Sequence.Main,
+                    "Sequence"
+                ),
+                new CourseTask(
+                    ConditionalOperationsAndLoops_Task4.Summ.Main,
+                    "Summ"
+                ),
                 new CourseTask(
                     ConditionalOperationsAndLoops_Task5.CurrenciesConverter.Main,
                     "Currencies converter"
