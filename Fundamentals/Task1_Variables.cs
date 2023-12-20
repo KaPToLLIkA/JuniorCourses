@@ -6,11 +6,13 @@
         {
             int age = 10;
 
-            float percentOfUsage = 33.3f;
+            char space = ' ';
+            
             float wallHeightInMeters = 2.7f;
 
             string userName = "Alex";
-            string lastName = "ZzzZ";
+
+            byte hashCode = 0xA8;
 
             long timeInSeconds = 33214423123L;
 
