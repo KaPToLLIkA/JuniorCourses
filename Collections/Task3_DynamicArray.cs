@@ -13,9 +13,9 @@ namespace Collections_Task3
 
             Dictionary<string, string> commandsDescriptions = new()
             {
-                {ExitCommand, "Summ all numbers"},
+                {SummCommand, "Summ all numbers"},
                 {AddValueCommand, "Add value"},
-                {SummCommand, "Exit"},
+                {ExitCommand, "Exit"},
             };
 
             List<string> availableCommands = new()
