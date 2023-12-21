@@ -4,31 +4,34 @@
     {
         public static void Main(string[] args)
         {
-            List<int> list1 = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            List<int> list2 = new() { 1, 2, 3, 13, 2, 10, 15, 16, 1, 0 };
+            int[] list1 = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            int[] list2 = new int[] { 1, 2, 3, 13, 2, 10, 15, 16, 1, 0 };
 
-            PrintList(list1);
-            PrintList(list2);
+            PrintList(list1.ToList()); 
+            PrintList(list2.ToList());
 
             List<int> resultList = MergeLists(list1, list2);
 
             PrintList(resultList);
         }
 
-        private static List<int> MergeLists(List<int> list1, List<int> list2)
+        private static List<int> MergeLists(int[] list1, int[] list2)
         {
             List<int> resultList = new();
 
-            foreach (int item in list1)
+            foreach (int number in list1)
             {
-                resultList.Add(item);
+                if (resultList.Contains(number) == false)
+                {
+                    resultList.Add(number);
+                }
             }
 
-            foreach (int item in list2)
+            foreach (int number in list2)
             {
-                if (resultList.Contains(item) == false)
+                if (resultList.Contains(number) == false)
                 {
-                    resultList.Add(item);
+                    resultList.Add(number);
                 }
             }
 
@@ -37,9 +40,9 @@
 
         private static void PrintList(List<int> list)
         {
-            foreach (int item in list)
+            foreach (int number in list)
             {
-                Console.Write($"{item}, ");
+                Console.Write($"{number}, ");
             }
 
             Console.WriteLine();
