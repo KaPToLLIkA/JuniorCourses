@@ -17,22 +17,19 @@
 
         private static List<int> MergeLists(List<int> list1, List<int> list2)
         {
-            HashSet<int> set = new();
             List<int> resultList = new();
 
             foreach (int item in list1)
             {
-                set.Add(item);
+                resultList.Add(item);
             }
 
             foreach (int item in list2)
             {
-                set.Add(item);
-            }
-
-            foreach (int item in set)
-            {
-                resultList.Add(item);
+                if (resultList.Contains(item) == false)
+                {
+                    resultList.Add(item);
+                }
             }
 
             return resultList;
