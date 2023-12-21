@@ -8,16 +8,15 @@
 
             Console.Write("Print available gold count: ");
 
-            int availableGoldCount = Convert.ToInt32(Console.ReadLine());
+            int goldCount = Convert.ToInt32(Console.ReadLine());
 
             Console.Write($"Diamond price: {diamondPrice}\nPrint count of diamonds you want to buy: ");
 
-            int requestedDiamondsCount = Convert.ToInt32(Console.ReadLine());
+            int diamondsCount = Convert.ToInt32(Console.ReadLine());
 
-            int diamondsCount = requestedDiamondsCount;
-            int remainingGoldCount = availableGoldCount - requestedDiamondsCount * diamondPrice;
+            goldCount -= diamondsCount * diamondPrice;
 
-            Console.WriteLine($"Gold: {remainingGoldCount}, Diamonds: {diamondsCount}");
+            Console.WriteLine($"Gold: {goldCount}, Diamonds: {diamondsCount}");
         }
     }
 }
