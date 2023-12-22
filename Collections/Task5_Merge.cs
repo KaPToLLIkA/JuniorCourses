@@ -1,48 +1,39 @@
 ﻿namespace Collections_Task5
 {
-    internal class Merge
+    internal static class Merge
     {
         public static void Main(string[] args)
         {
             int[] list1 = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             int[] list2 = new int[] { 1, 2, 3, 13, 2, 10, 15, 16, 1, 0 };
 
-            PrintList(list1.ToList()); 
-            PrintList(list2.ToList());
+            list1.ToList().Print();
+            list2.ToList().Print();
 
-            List<int> resultList = MergeLists(list1, list2);
-
-            PrintList(resultList);
-        }
-
-        private static List<int> MergeLists(int[] list1, int[] list2)
-        {
             List<int> resultList = new();
 
-            foreach (int number in list1)
-            {
-                if (resultList.Contains(number) == false)
-                {
-                    resultList.Add(number);
-                }
-            }
+            resultList.AddUniqueRange(list1);
+            resultList.AddUniqueRange(list2);
 
-            foreach (int number in list2)
-            {
-                if (resultList.Contains(number) == false)
-                {
-                    resultList.Add(number);
-                }
-            }
-
-            return resultList;
+            resultList.Print();
         }
 
-        private static void PrintList(List<int> list)
+        public static void AddUniqueRange<T>(this List<T> list, T[] values)
         {
-            foreach (int number in list)
+            foreach (T value in values)
             {
-                Console.Write($"{number}, ");
+                if (list.Contains(value) == false)
+                {
+                    list.Add(value);
+                }
+            }
+        }
+
+        public static void Print<T>(this List<T> list)
+        {
+            foreach (T item in list)
+            {
+                Console.Write($"{item}, ");
             }
 
             Console.WriteLine();
