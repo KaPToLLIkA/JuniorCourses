@@ -15,25 +15,16 @@
 
             int firstDivider = 3;
             int secondDivider = 5;
-            int thirdDivider = firstDivider * secondDivider;
 
             int summ = 0;
 
-            int minFirtsArithmetic = firstDivider;
-            int firstSequenceLength = maxValue / firstDivider;
-            int maxFirstArithmetic = firstSequenceLength * firstDivider;
-
-            int minSecondArithmetic = secondDivider;
-            int secondSequenceLength = maxValue / secondDivider;
-            int maxSecondArithmetic = secondSequenceLength * secondDivider;
-
-            int minThirdArithmetic = thirdDivider;
-            int thirdSequenceLength = maxValue / thirdDivider;
-            int maxThirdArithmetic = thirdSequenceLength * thirdDivider;
-
-            summ += (minFirtsArithmetic + maxFirstArithmetic) / 2 * firstSequenceLength;
-            summ += (minSecondArithmetic + maxSecondArithmetic) / 2 * secondSequenceLength;
-            summ -= (minThirdArithmetic + maxThirdArithmetic) / 2 * thirdSequenceLength;
+            for (int value = firstDivider; value <= maxValue; value++)
+            {
+                if (value % firstDivider == 0 || value % secondDivider == 0)
+                {
+                    summ += value;
+                }
+            }
 
             Console.WriteLine($"Summ: {summ}");
         }
