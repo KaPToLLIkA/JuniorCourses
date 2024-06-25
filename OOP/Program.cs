@@ -20,8 +20,8 @@
             var courseTasks = new List<CourseTask>
             {
                 new CourseTask(
-                    Main,
-                    "Concrete Row Column"
+                    Task1.Program.Main,
+                    "Single class"
                 ),
             };
 
