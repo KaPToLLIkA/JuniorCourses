@@ -2,15 +2,11 @@
 {
     internal class Player
     {
-        public int Id { get; private set; }
-
-        public string VisibleName { get; private set; }
-
-        public string Login { get; private set; }
-
-        public string PasswordHash { get; private set; }
-
-        public DateTime RegistrationDate { get; private set; }
+        private int _id;
+        private string _visibleName;
+        private string _login;
+        private string _passwordHash;
+        private DateTime _registrationDate;
 
         public Player(
             int id,
@@ -19,11 +15,11 @@
             string passwordHash,
             DateTime registrationDate)
         {
-            Id = id;
-            VisibleName = visibleName;
-            Login = login;
-            PasswordHash = passwordHash;
-            RegistrationDate = registrationDate;
+            _id = id;
+            _visibleName = visibleName;
+            _login = login;
+            _passwordHash = passwordHash;
+            _registrationDate = registrationDate;
         }
 
         public Player(int id, string visibleName, string login, string passwordHash)
@@ -32,21 +28,21 @@
 
         }
 
-        public void PrintToStream(TextWriter textWriter)
-        {
-            textWriter.WriteLine(ToString());
-        }
-
         public override string ToString()
         {
             return
                 $"\n{{" +
-                $"\n    \"{nameof(Id)}\" : {Id}," +
-                $"\n    \"{nameof(VisibleName)}\" : \"{VisibleName}\"," +
-                $"\n    \"{nameof(Login)}\" : \"{Login}\"," +
-                $"\n    \"{nameof(PasswordHash)}\" : \"{PasswordHash}\"," +
-                $"\n    \"{nameof(RegistrationDate)}\" : \"{RegistrationDate}\"," +
+                $"\n    \"{nameof(_id)}\" : {_id}," +
+                $"\n    \"{nameof(_visibleName)}\" : \"{_visibleName}\"," +
+                $"\n    \"{nameof(_login)}\" : \"{_login}\"," +
+                $"\n    \"{nameof(_passwordHash)}\" : \"{_passwordHash}\"," +
+                $"\n    \"{nameof(_registrationDate)}\" : \"{_registrationDate}\"," +
                 $"\n}}";
+        }
+
+        public void PrintToStream(TextWriter textWriter)
+        {
+            textWriter.WriteLine(ToString());
         }
     }
 }
