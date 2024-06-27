@@ -1,28 +1,48 @@
 ﻿namespace OOP.Task2
 {
-    internal class Player : IConsoleDrawable
+    internal class Player
     {
-        private char _marker;
-        private ConsoleColor _color;
-
         public Player(int x, int y, char marker, ConsoleColor color)
         {
-            X = x;
-            Y = y;
-            _marker = marker;
-            _color = color;
+            PositionX = x;
+            PositionY = y;
+            Marker = marker;
+            Color = color;
         }
 
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int PositionX { get; private set; }
+        public int PositionY { get; private set; }
 
-        public void Draw()
+        public char Marker { get; private set; }
+        public ConsoleColor Color { get; private set; }
+
+        public void Move(int xOffset, int yOffset)
         {
-            Console.ForegroundColor = _color;
-            Console.CursorLeft = X;
-            Console.CursorTop = Y;
+            PositionX += xOffset;
+            PositionY += yOffset;
+        }
 
-            Console.Write(_marker);
+        public void ClampedMove(int xOffset, int yOffset, int minX, int maxX, int minY, int maxY)
+        {
+            Move(xOffset, yOffset);
+
+            PositionX = ClampCoordinate(PositionX, minX, maxX);
+            PositionY = ClampCoordinate(PositionY, minY, maxY);
+        }
+
+        private int ClampCoordinate(int value, int min, int max)
+        {
+            if (value < min)
+            {
+                return min;
+            }
+
+            if (value > max)
+            {
+                return max;
+            }
+
+            return value;
         }
     }
 }
