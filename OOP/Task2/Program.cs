@@ -13,7 +13,9 @@
             int stepWidth = 1;
             int stepHeight = 1;
 
-            while (true)
+            bool isGameRunning = true;
+
+            while (isGameRunning)
             {
                 sceneDrawer.DrawScene();
 
