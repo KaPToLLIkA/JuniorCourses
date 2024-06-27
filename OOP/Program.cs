@@ -23,6 +23,10 @@
                     Task1.Program.Main,
                     "Single class"
                 ),
+                new CourseTask(
+                    Task2.Program.Main,
+                    "Player"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
