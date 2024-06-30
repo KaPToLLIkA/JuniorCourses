@@ -260,7 +260,7 @@
         }
     }
 
-    public enum ExecutionStatus
+    internal enum ExecutionStatus
     {
         Success,
         Fail
