@@ -27,6 +27,10 @@
                     Task2.Program.Main,
                     "Player"
                 ),
+                new CourseTask(
+                    Task3.Program.Main,
+                    "DataBase"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
