@@ -31,6 +31,10 @@
                     Task3.Program.Main,
                     "DataBase"
                 ),
+                new CourseTask(
+                    Task4.Program.Main,
+                    "CardsDeck"
+                ),
             };
 
             string noTaskText = "... task does'not exist ...";
