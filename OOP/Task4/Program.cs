@@ -7,7 +7,7 @@
             Player playerKostya = new("Kostya");
             Player playerPasha = new("Pasha");
 
-            Deck deck = Deck.PockerCardsDeck;
+            Deck deck = Deck.PockerDeck;
 
             Dealer dealer = new(deck, handOutCardsCount: 6);
             dealer.AddPlayerToGame(playerKostya);
@@ -55,22 +55,22 @@
 
     internal struct Card
     {
-        public Card(CardColor color, CardSuitType suit, CardType card)
+        public Card(CardColor color, CardSuitType suit, CardType type)
         {
             Color = color;
             Suit = suit;
-            CardType = card;
+            Type = type;
         }
 
         public CardColor Color { get; private set; }
 
         public CardSuitType Suit { get; private set; }
 
-        public CardType CardType { get; private set; }
+        public CardType Type { get; private set; }
 
         public override string ToString()
         {
-            return $"{Color} {Suit} {CardType}";
+            return $"{Color} {Suit} {Type}";
         }
     }
 
@@ -85,7 +85,7 @@
 
         public bool IsDeckEmpty => _cards.Count == 0;
 
-        public static Deck PockerCardsDeck
+        public static Deck PockerDeck
         {
             get
             {
@@ -146,7 +146,7 @@
             return outCards;
         }
 
-        public void ShowCardsDeck()
+        public void ShowCards()
         {
             Console.WriteLine("Deck:");
 
@@ -228,7 +228,7 @@
 
         public void ShowDeck()
         {
-            _deck.ShowCardsDeck();
+            _deck.ShowCards();
         }
     }
 }
