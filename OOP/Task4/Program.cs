@@ -7,7 +7,7 @@
             Player playerKostya = new("Kostya");
             Player playerPasha = new("Pasha");
 
-            Deck deck = Deck.PockerDeck;
+            Deck deck = new Deck();
 
             Dealer dealer = new(deck, handOutCardsCount: 6);
             dealer.AddPlayerToGame(playerKostya);
@@ -22,7 +22,7 @@
 
     internal enum CardType
     {
-        Ace, // В переводе - туз
+        Ace,
         Two,
         Three,
         Four,
@@ -48,8 +48,8 @@
     {
         None,
         Booby,
-        Spades, // пики
-        Clubs, // треф
+        Spades,
+        Clubs,
         Hearts,
     }
 
@@ -78,20 +78,11 @@
     {
         private List<Card> _cards;
 
-        private Deck(List<Card> cards)
+        public Deck()
         {
-            _cards = cards;
-        }
+            _cards = new List<Card>();
 
-        public bool IsDeckEmpty => _cards.Count == 0;
-
-        public static Deck PockerDeck
-        {
-            get
-            {
-                List<Card> newDeck = new();
-
-                Dictionary<CardSuitType, CardColor> cardsSuitColors = new()
+            Dictionary<CardSuitType, CardColor> cardsSuitColors = new()
                 {
                     { CardSuitType.Booby, CardColor.Red },
                     { CardSuitType.Hearts, CardColor.Red },
@@ -99,35 +90,39 @@
                     { CardSuitType.Spades, CardColor.Black },
                 };
 
-                List<CardSuitType> excludedNoneSuits = Enum
-                    .GetValues<CardSuitType>()
-                    .Where(suit => suit != CardSuitType.None)
-                    .ToList();
+            List<CardSuitType> excludedNoneSuits = Enum
+                .GetValues<CardSuitType>()
+                .Where(suit => suit != CardSuitType.None)
+                .ToList();
 
-                List<CardType> excludedJockerTypes = Enum
-                    .GetValues<CardType>()
-                    .Where(card => card != CardType.Joker)
-                    .ToList();
+            List<CardType> excludedJockerTypes = Enum
+                .GetValues<CardType>()
+                .Where(card => card != CardType.Joker)
+                .ToList();
 
-                foreach (CardSuitType suit in excludedNoneSuits)
+            foreach (CardSuitType suit in excludedNoneSuits)
+            {
+                foreach (CardType cardType in excludedJockerTypes)
                 {
-                    foreach (CardType cardType in excludedJockerTypes)
-                    {
-                        Card newCard = new(cardsSuitColors[suit], suit, cardType);
+                    Card newCard = new(cardsSuitColors[suit], suit, cardType);
 
-                        newDeck.Add(newCard);
-                    }
+                    _cards.Add(newCard);
                 }
-
-                Card blackJoker = new(CardColor.Black, CardSuitType.None, CardType.Joker);
-                Card redJoker = new(CardColor.Red, CardSuitType.None, CardType.Joker);
-
-                newDeck.Add(blackJoker);
-                newDeck.Add(redJoker);
-
-                return new Deck(newDeck);
             }
+
+            Card blackJoker = new(CardColor.Black, CardSuitType.None, CardType.Joker);
+            Card redJoker = new(CardColor.Red, CardSuitType.None, CardType.Joker);
+
+            _cards.Add(blackJoker);
+            _cards.Add(redJoker);
         }
+
+        public Deck(List<Card> cards)
+        {
+            _cards = cards;
+        }
+
+        public bool IsDeckEmpty => _cards.Count == 0;
 
         public List<Card> ProvideCards(int count)
         {
@@ -137,9 +132,9 @@
             {
                 if (IsDeckEmpty == false)
                 {
-                    outCards.Add(_cards[0]);
+                    outCards.Add(_cards.First());
 
-                    _cards.RemoveAt(0);
+                    _cards.Remove(_cards.First());
                 }
             }
 
